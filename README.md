@@ -1,69 +1,47 @@
-# React + TypeScript + Vite
+# 📊 React Spreadsheet Prototype (Inscripts Internship Assignment)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A front-end-only spreadsheet UI prototype built with **React 18**, **TypeScript**, **Tailwind CSS**, and **react-table** for Inscripts React Internship.
 
-Currently, two official plugins are available:
+This project replicates the layout and behavior of a spreadsheet-like view based on a Figma design.  
+It demonstrates pixel-perfect UI alignment, table grouping, dynamic toolbar actions, and interactivity using local component state.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📦 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ⚛️ React 18 + Vite
+- 🟦 TypeScript (strict mode)
+- 🎨 Tailwind CSS
+- 📊 react-table (v7)
+- 🖼️ react-icons
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## ✨ Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Spreadsheet-like table layout with:
+  - Column groups
+  - Dynamic colored column headers and data columns
+  - Status and priority badges with color coding
+  - Empty rows for future data input
+- Fully interactive toolbar buttons with icons
+- Notification badge in header
+- Search bar with console logging on input (no real filtering as per assignment spec)
+- Clean TypeScript typing for all components and table data
+- Responsive, clean, Tailwind-powered UI
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 📦 Install dependencies
+
+```bash
+npm install
+
+🌐 Live Demo
+👉 View Live Demo  ->  https://spread-sheet-iw5r.vercel.app/
+
+
+👨‍💻 Author
+Jonu Sharma
