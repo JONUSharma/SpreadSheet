@@ -69,7 +69,7 @@ const Toolbar: React.FC = () => {
 
         {/* New Action button */}
         <button
-          className="ml-auto flex items-center gap-1 bg-green-900 text-white text-sm px-4 py-1.5 rounded hover:bg-green-700 transition" onClick={()=> console.log("New action button clikced.")}
+          className="ml-auto flex items-center gap-1 bg-[#4B6A4F] text-white text-sm px-4 py-1.5 rounded hover:bg-green-700 transition" onClick={()=> console.log("New action button clikced.")}
         >
           <FaPlus />
           New Action

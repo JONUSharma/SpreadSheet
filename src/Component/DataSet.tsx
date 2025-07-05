@@ -1,5 +1,9 @@
 import React from 'react';
 import { useTable, type Column } from 'react-table';
+import { FaBriefcase } from "react-icons/fa";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
+
 // Define row type
 type DataRow = {
   jobRequest: string;
@@ -73,7 +77,7 @@ const data: DataRow[] = [
 ];
 
 // Add empty rows
-const emptyRows: DataRow[] = new Array(20).fill({
+const emptyRows: DataRow[] = new Array(50).fill({
   jobRequest: '',
   submitted: '',
   status: '',
@@ -99,15 +103,41 @@ const columns: Column<DataRow>[] = [
     Header: 'Q3 Financial Overview',
     columns: [
       {
-        Header: 'Job Request',
+        Header: () => (
+          <div className='flex justify-between '>
+            <span className='flex gap-3'>
+              <FaBriefcase className='top-1 relative' />
+              {"Job Request"}
+            </span>
+            <span className='relative text-2xl '><RiArrowDropDownLine /></span>
+
+          </div>
+        ),
         accessor: 'jobRequest',
+
       },
       {
-        Header: 'Submitted',
+        Header: () => (
+          <div className='flex justify-between'>
+            <span className='flex gap-3 '>
+              <img src='/Images/Shape.png' className="h-[15px] relative top-1" alt="img" />
+              Submitted
+            </span>
+            <span className='text-2xl'><RiArrowDropDownLine /></span>
+          </div>
+        ),
         accessor: 'submitted',
       },
       {
-        Header: 'Status',
+        Header: () => (
+          <div className='flex justify-between'>
+            <span className='flex gap-2 '>
+              <IoMdArrowDropdownCircle className='relative top-1' />
+              Status
+            </span>
+            <span className='text-2xl'><RiArrowDropDownLine /></span>
+          </div>
+        ),
         accessor: 'status',
         Cell: ({ value }) =>
           value ? (
@@ -126,26 +156,53 @@ const columns: Column<DataRow>[] = [
           ) : null,
       },
       {
-        Header: 'Submitter',
+        Header: () => (
+          <div className='flex justify-between gap-3'>
+            <span className='flex gap-2 '>
+              <img src="/Images/Person.png" className='h-[19px]' />
+              Submitter
+            </span>
+            <span className='text-2xl'><RiArrowDropDownLine /></span>
+          </div>
+        ),
         accessor: 'submitter',
       },
-      {
-        Header: 'URL',
-        accessor: 'url',
-        Cell: ({ value }) =>
-          value ? (
-            <a href={`https://${value}`} target="_blank" rel="noreferrer" className="text-black underline text-sm">
-              {value}
-            </a>
-          ) : null,
-      },
+
     ],
+
+  },
+
+  {
+    Header: () => (
+      <div className='flex justify-between '>
+        <span className='flex gap-2 '>
+          <img src="/Images/Shape (1).png" className='h-[19px]' />
+          URL
+        </span>
+        <span className='text-2xl'><RiArrowDropDownLine /></span>
+      </div>
+    ),
+    accessor: 'url',
+    Cell: ({ value }) =>
+      value ? (
+        <a href={`https://${value}`} target="_blank" rel="noreferrer" className="text-black underline text-sm">
+          {value}
+        </a>
+      ) : null,
   },
   {
     Header: 'ABC ...',
     columns: [
       {
-        Header: 'Assigned',
+        Header: () => (
+          <div className='flex justify-between'>
+            <span className='flex gap-2 '>
+              <img src="/Images/Shape (2).png" className='h-[19px]' />
+              Assigned
+            </span>
+            <span className='text-2xl'><RiArrowDropDownLine /></span>
+          </div>
+        ),
         accessor: 'assigned',
       },
     ],
@@ -207,25 +264,60 @@ const DataTable: React.FC = () => {
       <table {...getTableProps()} className="min-w-full border border-gray-300 text-sm">
         <thead>
           {headerGroups.map((headerGroup) => (
+
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => {
-                // assign color based on group header label
-                const groupBgColor =
-                  column.Header === 'ABC ...'
-                    ? 'bg-[#a3b8a9] '
-                    : column.Header === 'Answer a question ...'
-                      ? 'bg-purple-300'
-                      : column.Header === 'Extract ...'
-                        ? 'bg-[#e39686]'
-                        : column.Header === 'Due Date' ? 'bg-purple-200'
-                          : column.Header === 'Est. Value' ? "bg-[#f0d4ce]"
-                            : column.Header === 'Priority' ? "bg-purple-200 "
-                              : column.Header === "Assigned" ? "bg-[#c5dbcc]"
-                                : column.Header === "+" ? "bg-gray-200" : "";
+                let thBgColor = 'bg-white';
+                console.log('HeaderGroup:', headerGroup.headers)
+                // Check if it's a group header (text string)
+                if (typeof column.Header === 'string') {
+                  thBgColor =
+                    column.Header === 'Q3 Financial Overview'
+                      ? 'bg-[#E2E2E2]'
+                      : column.Header === 'ABC ...'
+                        ? 'bg-[#D2E0D4]'
+                        : column.Header === 'Answer a question ...'
+                          ? 'bg-[#DCCFFC]'
+                          : column.Header === 'Extract ...'
+                            ? 'bg-[#FAC2AF]'
+                            : column.Header === '+'
+                              ? 'bg-[#EEEEEE]'
+                              : column.Header === "Est. Value"
+                                ? "bg-[#FFE9E0]"
+                                : column.Header === "Priority"
+                                  ? "bg-[#EAE3FC]"
+                                  : column.Header === "Due Date"
+                                    ? "bg-[#EAE3FC]"
+                                    : column.Header === "Assigned"
+                                      ? "bg-[#EAE3FC]"
+                                      : 'bg-white';
+                }
+
+                // If it's a leaf column, check by accessor
+                if ('accessor' in column && column.accessor) {
+                  const accessor = typeof column.accessor as string;
+                  thBgColor =
+                    accessor === 'assigned'
+                      ? 'bg-[#E8F0E9]'
+                      : accessor === 'priority'
+                        ? 'bg-[#EAE3FC]'
+                        : accessor === 'dueDate'
+                          ? 'bg-[#EAE3FC]'
+                          : accessor === 'estValue'
+                            ? 'bg-[#FFE9E0]'
+                            : accessor === 'jobRequest' ||
+                              accessor === 'submitted' ||
+                              accessor === 'status' ||
+                              accessor === 'submitter' ||
+                              accessor === 'url'
+                              ? 'bg-[#EEEEEE]'
+                              : thBgColor; // preserve previous value if no match
+                }
+
                 return (
                   <th
                     {...column.getHeaderProps()}
-                    className={`px-4 py-2 border border-gray-200 text-left font-medium text-sm ${groupBgColor}`}
+                    className={`px-4 py-2 border border-gray-200 text-left font-medium text-sm ${thBgColor}`}
                   >
                     {column.render('Header')}
                   </th>
@@ -234,6 +326,8 @@ const DataTable: React.FC = () => {
             </tr>
           ))}
         </thead>
+
+
 
 
         <tbody {...getTableBodyProps()}>
@@ -246,6 +340,7 @@ const DataTable: React.FC = () => {
                     {cell.render('Cell')}
                   </td>
                 ))}
+                {/* <td><Plus/></td> */}
               </tr>
             );
           })}
